@@ -6,6 +6,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.timestamps
       t.decimal :price, precision: 8, scale: 2, null: false
       t.integer :family, null: false
+      t.string :image_url
     end
 
     add_reference :products, :brand, null: false, foreign_key: true, index: true, type: :uuid

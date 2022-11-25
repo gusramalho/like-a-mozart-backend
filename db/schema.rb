@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_223955) do
     t.datetime "updated_at", null: false
     t.decimal "price", precision: 8, scale: 2, null: false
     t.integer "family", null: false
+    t.string "image_url"
     t.uuid "brand_id", null: false
     t.uuid "category_id", null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
