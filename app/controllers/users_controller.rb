@@ -5,14 +5,14 @@ class UsersController < ApiController
     @user = User.new(user_params)
 
     if @user.save
-      render json: @user
+      render json: UserBlueprint.render(@user)
     else
       render status: 422, json: @user.errors
     end
   end
 
   def show
-    render json: @current_user
+    render json: UserBlueprint.render(@current_user)
   end
 
   def login
@@ -25,9 +25,9 @@ class UsersController < ApiController
 
     if @user.authenticate(params[:password])
       render json: {
-        user_id: @user.id,
-        user_name: @user.name,
-        access_token: JsonWebToken.encode(user_id: @user.id)
+        id: @user.id,
+        name: @user.name,
+        token: JsonWebToken.encode(user_id: @user.id)
       }
     else
       render_invalid_credentials
