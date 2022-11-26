@@ -1,4 +1,5 @@
 class UsersController < ApiController
+  before_action :authenticate_user, only: [:show]
 
   def create
     @user = User.new(user_params)
@@ -7,6 +8,29 @@ class UsersController < ApiController
       render json: @user
     else
       render status: 422, json: @user.errors
+    end
+  end
+
+  def show
+    render json: @current_user
+  end
+
+  def login
+    @user = User.find_by_email(normalize_email(params[:email]))
+
+    unless @user.present?
+      render_invalid_credentials
+      return
+    end
+
+    if @user.authenticate(params[:password])
+      render json: {
+        user_id: @user.id,
+        user_name: @user.name,
+        access_token: JsonWebToken.encode(user_id: @user.id)
+      }
+    else
+      render_invalid_credentials
     end
   end
 
@@ -28,5 +52,9 @@ class UsersController < ApiController
       :address_city,
       :receive_emails
     )
+  end
+
+  def normalize_email(email)
+    email&.to_s&.upcase&.strip
   end
 end

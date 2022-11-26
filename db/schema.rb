@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_010320) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false

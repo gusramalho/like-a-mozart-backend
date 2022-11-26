@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   resources :products, only: [:index]
 
-  resources :users, only: [:create]
+  resources :users, only: [:create, :show] do
+    post "/login", action: :login, on: :collection
+  end
 end

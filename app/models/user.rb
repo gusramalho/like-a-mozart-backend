@@ -18,7 +18,6 @@ class User < ApplicationRecord
   validates :address_number, presence: true
   validates :address_state, presence: true, length: { is: 2 }
   validates :address_city, presence: true
-  validates :receive_emails, presence: true
 
   private 
 
