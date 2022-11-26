@@ -14,4 +14,8 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :family, presence: true
   validates :image_url, presence: true
+
+  scope :from_family, -> (family) { where(family: family) }
+  scope :from_categories, -> (category_ids) { where(category_id: category_ids) }
+  scope :from_brands, -> (brand_ids) { where(brand_id: brand_ids) }
 end
