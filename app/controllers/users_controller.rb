@@ -5,7 +5,7 @@ class UsersController < ApiController
     @user = User.new(user_params)
 
     if @user.save
-      render json: UserBlueprint.render(@user)
+      render status: :created, json: UserBlueprint.render(@user)
     else
       render status: 422, json: @user.errors
     end

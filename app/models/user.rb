@@ -23,8 +23,8 @@ class User < ApplicationRecord
 
   def normalize_fields
     self.email = email&.to_s&.upcase&.strip
-    self.name = name&.to_s&.upcase&.strip
-    self.surname = surname&.to_s&.upcase&.strip
+    self.name = name&.to_s&.capitalize
+    self.surname = surname&.to_s&.capitalize
     self.address_state = address_state&.to_s&.upcase&.strip
     self.address_city = address_city&.to_s&.upcase&.strip
     self.address_street = address_street&.to_s&.upcase&.strip
