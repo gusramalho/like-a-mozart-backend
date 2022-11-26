@@ -10,7 +10,7 @@ class ProductsController < ApiController
     render json: {
       products: @products,
       size: @products.count,
-      page: params[:page]
+      page: params[:page].to_i
     } 
   end
 

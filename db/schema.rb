@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_25_223955) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_26_010320) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,25 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_25_223955) do
     t.uuid "category_id", null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.string "surname", null: false
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.date "birthdate", null: false
+    t.string "phone", null: false
+    t.string "address_zip_code", limit: 8
+    t.string "address_street", null: false
+    t.string "address_number", null: false
+    t.string "address_complement"
+    t.string "address_state", limit: 2
+    t.string "address_city", null: false
+    t.boolean "receive_emails", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "products", "brands"
