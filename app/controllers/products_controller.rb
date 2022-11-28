@@ -5,10 +5,10 @@ class ProductsController < ApiController
     @products = Product
       .joins(:brand)
       .joins(:category)
-      .from_family(params[:family])
+      .is_active
 
-    @products = @products.from_categories(params[:category_ids]) if params[:category_ids].present?
-    @products = @products.from_brands(params[:brand_ids]) if params[:brand_ids].present?
+    @products = @products.where_category_in(params[:category]) if params[:category].present?
+    @products = @products.where_brand_in(params[:brand]) if params[:brand].present?
     @products = @products.page(params[:page]).per(params[:size])
 
     render json: {
@@ -21,7 +21,7 @@ class ProductsController < ApiController
   private 
 
   def validate_required_variables
-    unless params[:family].present? && params[:page].present? && params[:size].present?
+    unless params[:page].present? && params[:size].present?
       render status: 400, json: {
         error: "Missing path variables"
       }

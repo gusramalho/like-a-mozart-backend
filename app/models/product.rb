@@ -15,7 +15,7 @@ class Product < ApplicationRecord
   validates :family, presence: true
   validates :image_url, presence: true
 
-  scope :from_family, -> (family) { where(family: family) }
-  scope :from_categories, -> (category_ids) { where(category_id: category_ids) }
-  scope :from_brands, -> (brand_ids) { where(brand_id: brand_ids) }
+  scope :is_active, -> { where(brand: { active: true }, category: { active: true }) }
+  scope :where_category_in, -> (category_slugs) { joins(:category).where(category: { slug: category_slugs }) }
+  scope :where_brand_in, -> (brand_slugs) { joins(:brand).where(brand: { slug: brand_slugs }) }
 end
