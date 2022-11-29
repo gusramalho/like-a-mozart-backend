@@ -1,24 +1,26 @@
-# README
+# Like-a-Mozart backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Requirements
 
-Things you may want to cover:
+- Ruby 3.1.2
+- Gem 3.3.25
+- Bundler 2.3.25
+- Rails 7.0.4
+- Docker
 
-* Ruby version
+## Install dependencies
+```
+$ bundle install
+```
 
-* System dependencies
+## Setup local PostgreSQL database
 
-* Configuration
+```
+$ docker compose up
+```
 
-* Database creation
+## Run application
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+$ rails s
+```
